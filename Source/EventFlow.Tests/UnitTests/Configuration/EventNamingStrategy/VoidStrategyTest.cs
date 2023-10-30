@@ -1,6 +1,7 @@
 // The MIT License (MIT)
 // 
-// Copyright (c) 2015-2024 Rasmus Mikkelsen
+// Copyright (c) 2015-2022 Rasmus Mikkelsen
+// Copyright (c) 2015-2021 eBay Software Foundation
 // https://github.com/eventflow/EventFlow
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -20,36 +21,29 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using EventFlow.Aggregates;
-using EventFlow.Configuration;
-using EventFlow.Core.VersionedTypes;
-using Microsoft.Extensions.Logging;
+using EventFlow.Configuration.EventNamingStrategy;
+using EventFlow.TestHelpers;
+using FluentAssertions;
+using NUnit.Framework;
 
-namespace EventFlow.EventStores
+namespace EventFlow.Tests.UnitTests.Configuration.EventNamingStrategy
 {
-    public class EventDefinitionService :
-        VersionedTypeDefinitionService<IAggregateEvent, EventVersionAttribute, EventDefinition>,
-        IEventDefinitionService
+    [Category(Categories.Unit)]
+    public class VoidStrategyTest
     {
-        private readonly IEventFlowConfiguration _eventFlowConfiguration;
+        private class Any {}
         
-        public EventDefinitionService(
-            ILogger<EventDefinitionService> logger,
-            ILoadedVersionedTypes loadedVersionedTypes,
-            IEventFlowConfiguration eventFlowConfiguration)
-            : base(logger)
+        [Test]
+        public void EventNameShouldBeUnchanged()
         {
-            _eventFlowConfiguration = eventFlowConfiguration;
-            Load(loadedVersionedTypes.Events);
-        }
-
-        protected override EventDefinition CreateDefinition(int version, Type type, string name)
-        {
-            var strategyAppliedName = _eventFlowConfiguration.EventNamingStrategy
-                .CreateEventName(version, type, name);
+            // Arrange
+            var strategy = BuiltInEventNamingStrategies.Void;
             
-            return new EventDefinition(version, type, strategyAppliedName);
+            // Act
+            var name = strategy.CreateEventName(1, typeof(Any), "OriginalName");
+            
+            // Assert
+            name.Should().Be("OriginalName");
         }
     }
 }

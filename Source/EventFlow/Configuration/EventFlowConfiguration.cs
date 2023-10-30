@@ -22,6 +22,7 @@
 
 using System;
 using EventFlow.Configuration.Cancellation;
+using EventFlow.Configuration.EventNamingStrategy;
 
 namespace EventFlow.Configuration
 {
@@ -86,6 +87,8 @@ namespace EventFlow.Configuration
         public CancellationBoundary CancellationBoundary { get; set; }
         
         public bool ForwardOptimisticConcurrencyExceptions { get; set; }
+        
+        public IEventNamingStrategy EventNamingStrategy { get; set; }
 
         internal EventFlowConfiguration()
         {
@@ -97,6 +100,7 @@ namespace EventFlow.Configuration
             IsAsynchronousSubscribersEnabled = false;
             CancellationBoundary = CancellationBoundary.BeforeCommittingEvents;
             ForwardOptimisticConcurrencyExceptions = false;
+            EventNamingStrategy = BuiltInEventNamingStrategies.Void;
         }
     }
 }

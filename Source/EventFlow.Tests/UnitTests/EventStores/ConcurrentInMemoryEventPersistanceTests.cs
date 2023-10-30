@@ -86,7 +86,7 @@ namespace EventFlow.Tests.UnitTests.EventStores
             var factory = new DomainEventFactory();
             var persistence = new InMemoryEventPersistence(Logger<InMemoryEventPersistence>());
             var upgradeManager = new EventUpgradeManager(Logger<EventUpgradeManager>(), serviceProvider, new EventUpgradeContextFactory());
-            var definitionService = new EventDefinitionService(Logger<EventDefinitionService>(), Mock<ILoadedVersionedTypes>());
+            var definitionService = new EventDefinitionService(Logger<EventDefinitionService>(), Mock<ILoadedVersionedTypes>(), new EventFlowConfiguration());
             definitionService.Load(typeof(ThingyPingEvent));
             var serializer = new EventJsonSerializer(new JsonSerializer(), definitionService, factory);
 

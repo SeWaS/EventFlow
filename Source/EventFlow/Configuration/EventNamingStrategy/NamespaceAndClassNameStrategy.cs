@@ -1,6 +1,7 @@
 // The MIT License (MIT)
 // 
-// Copyright (c) 2015-2024 Rasmus Mikkelsen
+// Copyright (c) 2015-2022 Rasmus Mikkelsen
+// Copyright (c) 2015-2021 eBay Software Foundation
 // https://github.com/eventflow/EventFlow
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,35 +22,12 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using EventFlow.Aggregates;
-using EventFlow.Configuration;
-using EventFlow.Core.VersionedTypes;
-using Microsoft.Extensions.Logging;
 
-namespace EventFlow.EventStores
+namespace EventFlow.Configuration.EventNamingStrategy
 {
-    public class EventDefinitionService :
-        VersionedTypeDefinitionService<IAggregateEvent, EventVersionAttribute, EventDefinition>,
-        IEventDefinitionService
+    public class NamespaceAndClassNameStrategy : IEventNamingStrategy
     {
-        private readonly IEventFlowConfiguration _eventFlowConfiguration;
-        
-        public EventDefinitionService(
-            ILogger<EventDefinitionService> logger,
-            ILoadedVersionedTypes loadedVersionedTypes,
-            IEventFlowConfiguration eventFlowConfiguration)
-            : base(logger)
-        {
-            _eventFlowConfiguration = eventFlowConfiguration;
-            Load(loadedVersionedTypes.Events);
-        }
-
-        protected override EventDefinition CreateDefinition(int version, Type type, string name)
-        {
-            var strategyAppliedName = _eventFlowConfiguration.EventNamingStrategy
-                .CreateEventName(version, type, name);
-            
-            return new EventDefinition(version, type, strategyAppliedName);
-        }
+        public string CreateEventName(int version, Type eventType, string name) =>
+            eventType.Namespace + "." + eventType.Name;
     }
 }

@@ -63,7 +63,8 @@ namespace EventFlow.Tests.UnitTests.EventStores
             var factory = new DomainEventFactory();
             var definitionService = new EventDefinitionService(
                 Mock<ILogger<EventDefinitionService>>(),
-                Mock<ILoadedVersionedTypes>());
+                Mock<ILoadedVersionedTypes>(),
+                new EventFlowConfiguration());
             definitionService.Load(typeof(ThingyPingEvent));
 
             _serializer = new EventJsonSerializer(new JsonSerializer(), definitionService, factory);
