@@ -100,7 +100,6 @@ namespace EventFlow.Configuration
             IsAsynchronousSubscribersEnabled = false;
             CancellationBoundary = CancellationBoundary.BeforeCommittingEvents;
             ForwardOptimisticConcurrencyExceptions = false;
-            EventNamingStrategy = BuiltInEventNamingStrategies.Void;
         }
     }
 }

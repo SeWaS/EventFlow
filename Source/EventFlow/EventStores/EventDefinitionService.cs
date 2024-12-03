@@ -23,6 +23,7 @@
 using System;
 using EventFlow.Aggregates;
 using EventFlow.Configuration;
+using EventFlow.Configuration.EventNamingStrategy;
 using EventFlow.Core.VersionedTypes;
 using Microsoft.Extensions.Logging;
 
@@ -32,22 +33,22 @@ namespace EventFlow.EventStores
         VersionedTypeDefinitionService<IAggregateEvent, EventVersionAttribute, EventDefinition>,
         IEventDefinitionService
     {
-        private readonly IEventFlowConfiguration _eventFlowConfiguration;
+        private readonly IEventNamingStrategy _eventNamingStrategy;
         
         public EventDefinitionService(
             ILogger<EventDefinitionService> logger,
             ILoadedVersionedTypes loadedVersionedTypes,
-            IEventFlowConfiguration eventFlowConfiguration)
+            IEventNamingStrategy eventNamingStrategy)
             : base(logger)
         {
-            _eventFlowConfiguration = eventFlowConfiguration;
+            _eventNamingStrategy = eventNamingStrategy;
+
             Load(loadedVersionedTypes.Events);
         }
 
         protected override EventDefinition CreateDefinition(int version, Type type, string name)
         {
-            var strategyAppliedName = _eventFlowConfiguration.EventNamingStrategy
-                .CreateEventName(version, type, name);
+            var strategyAppliedName = _eventNamingStrategy.CreateEventName(version, type, name);
             
             return new EventDefinition(version, type, strategyAppliedName);
         }

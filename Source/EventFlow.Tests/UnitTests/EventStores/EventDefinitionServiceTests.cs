@@ -41,7 +41,7 @@ namespace EventFlow.Tests.UnitTests.EventStores
         [SetUp]
         public void SetUp()
         {
-            Inject<IEventFlowConfiguration>(new EventFlowConfiguration());
+            Inject<IEventNamingStrategy>(new VoidStrategy());
         }
         
         [Test]
@@ -75,7 +75,7 @@ namespace EventFlow.Tests.UnitTests.EventStores
         public void GetDefinitions_OnEventWithMultipleDefinitionsAndNonDefaultNamingStrategy_ReturnsThemAll()
         {
             // Arrange
-            Inject<IEventFlowConfiguration>(new EventFlowConfiguration {EventNamingStrategy = BuiltInEventNamingStrategies.NamespaceAndClassName});
+            Inject<IEventNamingStrategy>(new NamespaceAndClassNameStrategy());
             Sut.Load(typeof(MultiNamesEvent));
 
             // Act

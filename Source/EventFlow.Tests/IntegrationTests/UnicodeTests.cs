@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using EventFlow.Aggregates;
 using EventFlow.Commands;
 using EventFlow.Configuration;
+using EventFlow.Configuration.EventNamingStrategy;
 using EventFlow.Core;
 using EventFlow.EventStores;
 using EventFlow.Extensions;
@@ -95,7 +96,7 @@ namespace EventFlow.Tests.IntegrationTests
             var eventDefinitionService = new EventDefinitionService(
                 Mock<ILogger<EventDefinitionService>>(),
                 Mock<ILoadedVersionedTypes>(),
-                new EventFlowConfiguration());
+                new VoidStrategy());
 
             // Act
             Action action = () => eventDefinitionService.Load(typeof(Püng1Event));
@@ -111,6 +112,7 @@ namespace EventFlow.Tests.IntegrationTests
                 .AddEvents(typeof(Püng1Event))
                 .AddCommands(typeof(Cömmand))
                 .AddCommandHandlers(typeof(CömmandHändler))
+                .RegisterServices(s => s.AddScoped<IEventNamingStrategy, NamespaceAndClassNameStrategy>())
                 .ServiceCollection.BuildServiceProvider();
 
             var bus = resolver.GetRequiredService<ICommandBus>();

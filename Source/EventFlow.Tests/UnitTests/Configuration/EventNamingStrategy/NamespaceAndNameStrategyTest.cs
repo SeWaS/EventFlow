@@ -1,7 +1,6 @@
 // The MIT License (MIT)
 // 
-// Copyright (c) 2015-2022 Rasmus Mikkelsen
-// Copyright (c) 2015-2021 eBay Software Foundation
+// Copyright (c) 2015-2024 Rasmus Mikkelsen
 // https://github.com/eventflow/EventFlow
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -36,7 +35,7 @@ namespace EventFlow.Tests.UnitTests.Configuration.EventNamingStrategy
         public void EventNameShouldBeNamespaceAndClassName()
         {
             // Arrange
-            var strategy = BuiltInEventNamingStrategies.NamespaceAndName;
+            var strategy = new NamespaceAndNameStrategy();
             
             // Act
             var name = strategy.CreateEventName(1, typeof(Any), "NameFromAttribute");
