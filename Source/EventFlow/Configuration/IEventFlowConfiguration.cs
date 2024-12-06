@@ -87,17 +87,5 @@ namespace EventFlow.Configuration
         CancellationBoundary CancellationBoundary { get; }
 
         bool ForwardOptimisticConcurrencyExceptions { get; set; }
-        
-        /// <summary>
-        /// Use <c>EventNamingStrategy</c> to determine the internal naming strategy
-        /// for events. The strategy is applied whenever an event is persisted
-        /// and loading from persistence and when serializing/deserializing in that
-        /// context respectively.
-        /// 
-        /// If more fine grained control of is needed, a custom implementation of
-        /// <c>IEventNamingStrategy</c> should be provided.
-        /// </summary>
-        /// <remarks>Defaults to SimpleNamingStrategy</remarks>
-        IEventNamingStrategy EventNamingStrategy { get; }
     }
 }

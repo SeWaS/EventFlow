@@ -41,7 +41,7 @@ namespace EventFlow.Tests.UnitTests.EventStores
         [SetUp]
         public void SetUp()
         {
-            Inject<IEventNamingStrategy>(new VoidStrategy());
+            Inject<IEventNamingStrategy>(new DefaultStrategy());
         }
         
         [Test]

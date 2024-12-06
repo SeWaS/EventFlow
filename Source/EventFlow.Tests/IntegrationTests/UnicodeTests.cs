@@ -96,7 +96,7 @@ namespace EventFlow.Tests.IntegrationTests
             var eventDefinitionService = new EventDefinitionService(
                 Mock<ILogger<EventDefinitionService>>(),
                 Mock<ILoadedVersionedTypes>(),
-                new VoidStrategy());
+                new DefaultStrategy());
 
             // Act
             Action action = () => eventDefinitionService.Load(typeof(Püng1Event));

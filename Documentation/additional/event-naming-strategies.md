@@ -12,7 +12,7 @@ In order to avoid this, EventFlow incorporates the concept of event naming strat
 
 There are a few naming strategies already available in EventFlow out-of-the-box:
 
-- `VoidStrategy`: The **default behaviour**, if not overwritten explicitly. This strategy will use the className or (if provided) the value coming from an `[EventVersion]` attribute. This matches the implicit naming strategy from previous EventFlow versions.
+- `DefaultStrategy`: The **default behaviour**, if not overwritten explicitly. This strategy will use the className or (if provided) the value coming from an `[EventVersion]` attribute. This matches the implicit naming strategy from previous EventFlow versions.
 
 - `NamespaceAndNameStrategy`: This strategy uses both the namespace and the class name or (if provided) the value coming from an `[EventVersion]` attribute to uniquely identify an event class.
 - `NamespaceAndClassNameStrategy`: This strategy uses both the namespace and the class name to uniquely identify an event class. Any name value coming from an `[EventVersion]` attribute will be ignored for internal naming.

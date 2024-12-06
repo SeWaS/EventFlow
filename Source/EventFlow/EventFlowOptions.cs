@@ -229,7 +229,7 @@ namespace EventFlow
                 _sagaTypes,
                 _snapshotTypes));
             
-            serviceCollection.TryAddTransient<IEventNamingStrategy, VoidStrategy>();
+            serviceCollection.TryAddTransient<IEventNamingStrategy, DefaultStrategy>();
         }
 
         private void RegisterObsoleteDefaults(IServiceCollection serviceCollection)

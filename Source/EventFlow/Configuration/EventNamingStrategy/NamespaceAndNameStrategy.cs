@@ -27,6 +27,6 @@ namespace EventFlow.Configuration.EventNamingStrategy
     public class NamespaceAndNameStrategy : IEventNamingStrategy
     {
         public string CreateEventName(int version, Type eventType, string name) 
-            => eventType.Namespace + "." + name;
+            => $"{eventType.Namespace}.{name}";
     }
 }

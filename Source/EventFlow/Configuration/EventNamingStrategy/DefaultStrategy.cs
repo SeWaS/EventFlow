@@ -24,7 +24,7 @@ using System;
 
 namespace EventFlow.Configuration.EventNamingStrategy
 {
-    internal class VoidStrategy : IEventNamingStrategy
+    internal class DefaultStrategy : IEventNamingStrategy
     {
         public string CreateEventName(int version, Type eventType, string name) => name;
     }

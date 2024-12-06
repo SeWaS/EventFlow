@@ -87,8 +87,6 @@ namespace EventFlow.Configuration
         public CancellationBoundary CancellationBoundary { get; set; }
         
         public bool ForwardOptimisticConcurrencyExceptions { get; set; }
-        
-        public IEventNamingStrategy EventNamingStrategy { get; set; }
 
         internal EventFlowConfiguration()
         {

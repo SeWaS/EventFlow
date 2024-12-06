@@ -28,7 +28,7 @@ using NUnit.Framework;
 namespace EventFlow.Tests.UnitTests.Configuration.EventNamingStrategy
 {
     [Category(Categories.Unit)]
-    public class VoidStrategyTest
+    public class DefaultStrategyTest
     {
         private class Any {}
         
@@ -36,7 +36,7 @@ namespace EventFlow.Tests.UnitTests.Configuration.EventNamingStrategy
         public void EventNameShouldBeUnchanged()
         {
             // Arrange
-            var strategy = new VoidStrategy();
+            var strategy = new DefaultStrategy();
             
             // Act
             var name = strategy.CreateEventName(1, typeof(Any), "OriginalName");
