@@ -24,11 +24,6 @@ on:
       nuget-api-key:
         required: false
 
-# Cannot elevate permissions here, but we limit in case we got more than we need
-permissions:
-  contents: write
-  packages: write
-
 jobs:
   build:
     runs-on:
