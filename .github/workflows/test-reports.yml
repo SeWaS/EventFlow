@@ -4,6 +4,7 @@ on:
     workflows:
     - 'CI'
     - 'Release'
+    - 'pull-requests'
     types:
     - completed
 
