@@ -13,6 +13,7 @@ jobs:
     uses: ./.github/workflows/pipeline.yaml
     with:
       bake-convention: 'Release'
+      environment: 'release'
       version: "1.1.0"
     secrets:
       nuget-api-key: ${{ secrets.NUGET_APIKEY }}

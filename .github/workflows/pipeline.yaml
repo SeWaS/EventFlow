@@ -16,13 +16,22 @@ on:
         required: false
         type: string
         default: '0.30.43-beta'
+      environment:
+        required: false
+        type: string
+        default: 'develop'
     secrets:
       nuget-api-key:
         required: false
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on:
+    - ubuntu-20.04
+
+    environment: 
+      name: ${{ inputs.environment }}
+
     env:
       HELPZ_POSTGRESQL_PASS: Password12!
       EVENTFLOW_MSSQL_SERVER: 127.0.0.1,1433
